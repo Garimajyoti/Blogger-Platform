@@ -14,7 +14,21 @@ export const getAllBlogs = async (request, response) => {
 };
 
 export const createBlog = async (request, response) => {
-    
+    const { title, content, author, tags } = request.body;
+
+    const newBlog = new Blog({
+        title,
+        content,
+        author,
+        tags,
+    });
+
+    try {
+        await newBlog.save();
+    } catch (err) {
+        return console.log(err);
+    }
+    return response.status(201).json({ newBlog });
 };
 
 
