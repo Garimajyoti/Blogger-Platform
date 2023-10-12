@@ -31,4 +31,30 @@ export const createBlog = async (request, response) => {
     return response.status(201).json({ newBlog });
 };
 
+export const updateBlog = async (request, response) => {
+    const blogId = request.params.id;
+    const { title, content, tags } = request.body;
+
+    try {
+        const updatedBlog = await Blog.findByIdAndUpdate(
+            blogId,
+            {
+                title,
+                content,
+                tags,
+            },
+            { new: true }
+        );
+
+        if (!updatedBlog) {
+            return response.status(404).json({ message: "Blog post not found" });
+        }
+
+        return response.status(200).json({ updatedBlog });
+    } catch (err) {
+        console.log(err);
+        return response.status(500).json({ message: "Error updating the blog post" });
+    }
+};
+
 
