@@ -1,4 +1,5 @@
 import User from "../models/User";
+import bcrypt from "bcryptjs";
 
 export const getAllUsers = async(request, response, args)=>{
     let allUsers;
@@ -28,10 +29,11 @@ export const userSignup = async(request, response, args) => {
         return response.status(400).json({message: "User is alreday existing"})
     }
 
+    const bcryptPassword = bcrypt.hashSync(password);
     const newUser = new User({
         username,
         email,
-        password,
+        password : bcryptPassword,
         registrationDate
     });
 
