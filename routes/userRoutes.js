@@ -1,9 +1,9 @@
 import express from "express";
 import { getAllUsers, userLogin, userSignup } from "../controllers/userController";
 
-const blogRouter = express.Router();
+const userRoute = express.Router();
 
-blogRouter.get("/", getAllUsers);
-blogRouter.post("/signup", userSignup);
-blogRouter.post("/login", userLogin);
-export default blogRouter;
+userRoute.get("/", getAllUsers);
+userRoute.post("/signup", userSignup);
+userRoute.post("/login", userLogin);
+export default userRoute;
