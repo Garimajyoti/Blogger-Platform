@@ -57,4 +57,20 @@ export const updateBlog = async (request, response) => {
     }
 };
 
+export const deleteBlog = async (request, response) => {
+    const blogId = request.params.id;
+
+    try {
+        const deletedBlog = await Blog.findByIdAndDelete(blogId);
+
+        if (!deletedBlog) {
+            return response.status(404).json({ message: "Blog post not found" });
+        }
+
+        return response.status(204).json(); // 204 indicates a successful delete with no content
+    } catch (err) {
+        console.log(err);
+        return response.status(500).json({ message: "Error deleting the blog post" });
+    }
+};
 
