@@ -46,4 +46,24 @@ export const userSignup = async(request, response, args) => {
 
 }
 
+export const userLogin = async(request, response, args) => {
+    const {email, password} = request.body;
+    let userExits;
+    try{
+        userExits = await User.findOne({email});
+    }catch(err){
+        return console.log(err);
+    }
+
+    if(!userExits){
+        return response.status(404).json({message: "User is not found"});
+    }
+
+    const matchedPassword = bcrypt.compareSync(password, userExits.password);
+    if(!matchedPassword){
+        return response.status(400).json({message:"Entered password is incorrect"})
+    }
+    return response.status(200).json({message:"User is logged in successfully"})
+}
+
 
