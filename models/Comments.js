@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const commentSchema = new Schema({
+const commentModal = new Schema({
     commenterName: {
         type: String,
         required: true,
@@ -21,4 +21,4 @@ const commentSchema = new Schema({
     },
 });
 
-export default mongoose.model("Comment", commentSchema);
+export default mongoose.model("Comments", commentModal);
