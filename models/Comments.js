@@ -18,6 +18,7 @@ const commentModal = new Schema({
     blogPost: {
         type: Schema.Types.ObjectId,
         ref: "Blog",
+        required:true,
     },
 });
 

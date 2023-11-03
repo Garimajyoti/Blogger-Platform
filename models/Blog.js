@@ -15,11 +15,15 @@ const blogModal = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
+    country:{
+        type: String,
+        required: true,
+    },
     creationDate: {
         type: Date,
         default: Date.now,
     },
-    tags: [String], // Optional: You can add an array of tags
+    tags: [String], 
 });
 
 export default mongoose.model("Blog", blogModal);

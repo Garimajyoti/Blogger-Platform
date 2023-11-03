@@ -14,4 +14,3 @@ mongoose.connect("mongodb+srv://root:root@cluster0.0ts0l43.mongodb.net/test?retr
 .then(()=>
 console.log("Database is connected"))
 .catch((err)=> console.log(err));
-

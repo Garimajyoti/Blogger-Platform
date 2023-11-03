@@ -14,12 +14,13 @@ export const getAllBlogs = async (request, response) => {
 };
 
 export const createBlog = async (request, response) => {
-    const { title, content, author, tags } = request.body;
+    const { title, content, author, country, tags } = request.body;
 
     const newBlog = new Blog({
         title,
         content,
         author,
+        country,
         tags,
     });
 
@@ -71,6 +72,24 @@ export const deleteBlog = async (request, response) => {
     } catch (err) {
         console.log(err);
         return response.status(500).json({ message: "Error deleting the blog post" });
+    }
+};
+
+export const getAllBlogsFiltered = async (request, response) => {
+    const { tags, categories } = request.query;
+
+    const filter = {};
+
+    if (tags) {
+        filter.tags = { $in: tags.split(",") };
+    }
+
+    try {
+        const allBlogs = await Blog.find(filter);
+        return response.status(200).json({ allBlogs });
+    } catch (err) {
+        console.log(err);
+        return response.status(500).json({ message: "Error fetching filtered blog posts" });
     }
 };
 
